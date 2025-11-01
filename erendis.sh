@@ -40,3 +40,32 @@ nano /etc/bind/k51.com
 
 ln -s /etc/init.d/named /etc/init.d/bind9
 service bind9 restart
+
+# no 5
+nano /etc/bind/k51.com
+www       IN      CNAME   palantir.k51.com.
+elros.k51.com.     IN      TXT     "Cincin Sauron"
+pharazon.k51.com.  IN      TXT     "Aliansi Terakhir"
+
+nano /etc/bind/named.conf.local
+zone "3.89.10.in-addr.arpa" {
+	type master;
+    notify yes;
+    also-notify { 10.89.3.3; };
+    allow-transfer { 10.89.3.3; };
+    file "/etc/bind/3.89.10.in-addr.arpa";
+};
+
+nano /etc/bind/3.89.10.in-addr.arpa
+# $TTL    604800          ; Waktu cache default (detik)
+# @       IN      SOA     k51.com. root.k51.com. (
+#                         2025100401 ; Serial (format YYYYMMDDXX)
+#                         604800     ; Refresh (1 minggu)
+#                         86400      ; Retry (1 hari)
+#                         2419200    ; Expire (4 minggu)
+#                         604800 )   ; Negative Cache TTL
+# ;
+
+# 3.89.10.in-addr.arpa.       IN      NS      k51.com.
+# 2       IN      PTR     erendis.k51.com.
+# 3       IN      PTR     amdir.k51.com.

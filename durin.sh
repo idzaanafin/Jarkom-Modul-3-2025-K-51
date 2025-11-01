@@ -13,3 +13,9 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 
 sysctl -p
 service isc-dhcp-relay restart
+
+
+# no 3
+# gatau ini pake iptables ga
+
+

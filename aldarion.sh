@@ -1,6 +1,6 @@
 # dhcp server
 
-# no 2
+# no 2 dan 3
 apt update
 apt install isc-dhcp-server -y
 
@@ -19,7 +19,7 @@ subnet 10.89.1.0 netmask 255.255.255.0 {
     # option domain-name "k51.com";
     option domain-name-servers 10.89.5.2;
     default-lease-time 600;
-    max-lease-time 7200;
+    max-lease-time 3600;
 }
 
 subnet 10.89.2.0 netmask 255.255.255.0 {
@@ -29,8 +29,8 @@ subnet 10.89.2.0 netmask 255.255.255.0 {
     option broadcast-address 10.89.2.255;
     # option domain-name "k51.com";
     option domain-name-servers 10.89.5.2;
-    default-lease-time 600;
-    max-lease-time 7200;
+    default-lease-time 1800;
+    max-lease-time 3600;
 }
 
 subnet 10.89.3.0 netmask 255.255.255.0 {
@@ -39,7 +39,7 @@ subnet 10.89.3.0 netmask 255.255.255.0 {
     # option domain-name "k51.com";
     option domain-name-servers 10.89.5.2;
     default-lease-time 600;
-    max-lease-time 7200;
+    max-lease-time 3600;
 }
 # fixed address untuk subnet 10.89.3.0/24
 host khamul {
@@ -48,3 +48,4 @@ host khamul {
 }
 
 service isc-dhcp-server restart
+
