@@ -299,7 +299,17 @@ nano /etc/nginx/sites-available/k51.com
 #     access_log /var/log/nginx/k51.com_access.log;
 # }
 
-unlink /etc/nginx/sites-enabled/default
+# block ip request
+nano /etc/nginx/sites-enabled/default
+server {
+    listen 8001 default_server;
+    listen [::]:8001 default_server;
+
+    server_name _;
+
+    return 444;
+}
+
 ln -s /etc/nginx/sites-available/k51.com /etc/nginx/sites-enabled/
 chown -R www-data:www-data /var/www/laravel-simple-rest-api/storage
 service php8.4-fpm start
@@ -361,7 +371,17 @@ nano /etc/nginx/sites-available/k51.com
 #     access_log /var/log/nginx/k51.com_access.log;
 # }
 
-unlink /etc/nginx/sites-enabled/default
+# block ip request
+nano /etc/nginx/sites-enabled/default
+server {
+    listen 8002 default_server;
+    listen [::]:8002 default_server;
+
+    server_name _;
+
+    return 444;
+}
+
 ln -s /etc/nginx/sites-available/k51.com /etc/nginx/sites-enabled/
 chown -R www-data:www-data /var/www/laravel-simple-rest-api/storage
 service php8.4-fpm start
@@ -423,7 +443,18 @@ nano /etc/nginx/sites-available/k51.com
 #     access_log /var/log/nginx/k51.com_access.log;
 # }
 
-unlink /etc/nginx/sites-enabled/default
+# block ip request
+nano /etc/nginx/sites-enabled/default
+server {
+    listen 8003 default_server;
+    listen [::]:8003 default_server;
+
+    server_name _;
+
+    return 444;
+}
+
+s
 ln -s /etc/nginx/sites-available/k51.com /etc/nginx/sites-enabled/
 chown -R www-data:www-data /var/www/laravel-simple-rest-api/storage
 service php8.4-fpm start
