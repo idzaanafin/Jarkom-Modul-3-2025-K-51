@@ -10,7 +10,7 @@ zone "k51.com" {
     notify yes;
     also-notify { 10.89.3.3; };
     allow-transfer { 10.89.3.3; };
-    file "/etc/bind/db.k51.com";
+    file "/etc/bind/k51.com";
 };
 
 nano /etc/bind/k51.com
@@ -25,10 +25,9 @@ nano /etc/bind/k51.com
 
 # @         IN      NS      ns1.k51.com.
 # @         IN      NS      ns2.k51.com.
-# @         IN      A       10.89.3.10
 # ns1       IN      A       10.89.3.2
 # ns2       IN      A       10.89.3.3
-# palantir  IN      A       192.89.4.3
+# palantir  IN      A       10.89.4.3
 # elros     IN      A       10.89.1.6
 # pharazon  IN      A       10.89.2.6
 # elendil   IN      A       10.89.1.2
@@ -43,9 +42,9 @@ service bind9 restart
 
 # no 5
 nano /etc/bind/k51.com
-www       IN      CNAME   palantir.k51.com.
 elros.k51.com.     IN      TXT     "Cincin Sauron"
 pharazon.k51.com.  IN      TXT     "Aliansi Terakhir"
+www       IN      CNAME   palantir.k51.com.
 
 nano /etc/bind/named.conf.local
 zone "3.89.10.in-addr.arpa" {
@@ -67,5 +66,5 @@ nano /etc/bind/3.89.10.in-addr.arpa
 # ;
 
 # 3.89.10.in-addr.arpa.       IN      NS      k51.com.
-# 2       IN      PTR     erendis.k51.com.
-# 3       IN      PTR     amdir.k51.com.
+# 2       IN      PTR     ns1.k51.com.
+# 3       IN      PTR     ns2.k51.com.

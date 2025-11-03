@@ -1,5 +1,4 @@
 # dhcp server
-
 # no 2 dan 3 dan 6
 apt update
 apt install isc-dhcp-server -y

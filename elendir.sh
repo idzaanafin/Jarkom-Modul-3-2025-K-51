@@ -23,6 +23,9 @@ composer install
 apt install mariadb-client -y
 cp .env.example .env
 # ganti db host
+# user=worker
+# password=123
+# database=laravel
 php artisan migrate:fresh
 php artisan db:seed --class=AiringsTableSeeder
 php artisan key:generate
@@ -45,7 +48,7 @@ nano /etc/nginx/sites-available/k51.com
 #     # pass PHP scripts to FastCGI server
 #     location ~ \.php$ {
 #     include snippets/fastcgi-php.conf;
-#     fastcgi_pass unix:/var/run/php/php8.0-fpm.sock;
+#     fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
 #     }
 
 # location ~ /\.ht {
@@ -55,8 +58,22 @@ nano /etc/nginx/sites-available/k51.com
 #     error_log /var/log/nginx/k51.com_error.log;
 #     access_log /var/log/nginx/k51.com_access.log;
 # }
+
+# block ip request
+nano /etc/nginx/sites-enabled/default
+server {
+    listen 8001 default_server;
+    listen [::]:8001 default_server;
+
+    server_name _;
+
+    return 444;
+}
+
+
 ln -s /etc/nginx/sites-available/k51.com /etc/nginx/sites-enabled/
 chown -R www-data:www-data /var/www/laravel-simple-rest-api/storage
+service php8.4-fpm start
 service nginx restart
 
 

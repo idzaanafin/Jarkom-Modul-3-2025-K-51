@@ -9,6 +9,7 @@ nano /etc/bind/named.conf.local
 #     file "/etc/bind/k51.com";
 # };
 
+#no 5
 nano /etc/bind/named.conf.local
 # zone "3.89.10.in-addr.arpa" {
 # 	type slave;
