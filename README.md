@@ -77,9 +77,9 @@ apt update
 apt install isc-dhcp-relay -y
 
 nano /etc/default/isc-dhcp-relay
-# SERVERS="10.89.4.2"
-# INTERFACES="eth1 eth2 eth3 eth4"
-# OPTIONS=""
+SERVERS="10.89.4.2"
+INTERFACES="eth1 eth2 eth3 eth4"
+OPTIONS=""
 
 echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 
@@ -97,7 +97,7 @@ service isc-dhcp-relay restart
 
 ## KONFIGURASI DNS 
 
-### KONFIGURASI DNS FORWARDER
+### KONFIGURASI DNS FORWARDER (minastir)
 ```
 apt update
 apt install bind9 -y
@@ -127,7 +127,7 @@ service bind9 restart
 <img width="1053" height="471" alt="image" src="https://github.com/user-attachments/assets/9db52242-8dd1-45f8-b215-c95c3a997ce7" />
 
 
-### KONFIGURASI DNS SERVER
+### KONFIGURASI DNS SERVER (erendis)
 ```
 apt update
 apt install bind9 -y
@@ -138,7 +138,7 @@ zone "k51.com" {
     notify yes;
     also-notify { 10.89.3.3; };
     allow-transfer { 10.89.3.3; };
-    file "/etc/bind/db.k51.com";
+    file "/etc/bind/k51.com";
 };
 
 nano /etc/bind/k51.com
@@ -198,7 +198,7 @@ nano /etc/bind/3.89.10.in-addr.arpa
 # 3       IN      PTR     amdir.k51.com.
 ```
 
-### KONFIGURASI DNS SLAVE
+### KONFIGURASI DNS SLAVE (amdir)
 ```
 apt update
 apt install bind9 -y
@@ -236,7 +236,7 @@ service bind9 restart
 
 ## KONFIGURASI WORKER
 
-### KONFIGURASI WORKER 1
+### KONFIGURASI WORKER 1 (elendir)
 ```
 # no 7
 # install php8.4 laravel nginx composer
@@ -316,7 +316,7 @@ service php8.4-fpm start
 service nginx restart
 ```
 
-### KONFIGURASI WORKER 2
+### KONFIGURASI WORKER 2 (isildur)
 ```
 # no 7
 # install php8.4 laravel nginx composer
@@ -388,7 +388,7 @@ service php8.4-fpm start
 service nginx restart
 ```
 
-### KONFIGURASI WORKER 3
+### KONFIGURASI WORKER 3 (anarion)
 ```
 # no 7
 # install php8.4 laravel nginx composer
@@ -468,7 +468,7 @@ service nginx restart
 <img width="1046" height="405" alt="image" src="https://github.com/user-attachments/assets/eb9758fe-df52-4bd9-bea1-87cb46beec4b" />
 
 
-## KONFIGURASI DATABASE SERVER
+## KONFIGURASI DATABASE SERVER (palantir)
 ```
 # no 8
 # database server
