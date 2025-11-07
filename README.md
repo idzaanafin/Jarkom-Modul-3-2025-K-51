@@ -55,6 +55,23 @@ iface eth5 inet static
     netmask 255.255.255.0
 ```
 
+Konfigurasi nodes lain
+```
+auto eth0
+iface eth0 inet static
+    address (sesuaikan dengan masing-masing nodes)
+    netmask 255.255.255.0
+    gateway (sesuaikan dengan masing-masing nodes)
+ up echo nameserver 192.168.122.1 > /etc/resolv.conf
+```
+
+Setelah kita konfigurasi kita coba test apakah jalan dengan cara `ping google.com` pada salah satu nodes
+
+<img width="639" height="250" alt="image" src="https://github.com/user-attachments/assets/f0549cb3-6966-4526-b37b-558cdb84ba04" />
+
+Dan yap! nomer 1 sudah selesai
+
+
 ## KONFIGURASI DHCP
 pada no 2 diminta untuk melakukan konfigurasi DHCP agar client dynamic mendapatkan IP Address secara otomatis dari DHCP Server. Karena beberapa klient berada di jaringan yang berbeda, maka diperlukan DHCP Relay agar client dapat terhubung ke DHCP Server.
 
@@ -111,14 +128,6 @@ host khamul {
 service isc-dhcp-server restart
 ```
 
-Konfigurasi nodes lain
-auto eth0
-iface eth0 inet static
-    address (sesuaikan dengan masing-masing nodes)
-    netmask 255.255.255.0
-    gateway (sesuaikan dengan masing-masing nodes)
- up echo nameserver 192.168.122.1 > /etc/resolv.conf
-
 
 ### KONFIGURASI DHCP RELAY (durin)
 ```
@@ -135,12 +144,6 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 service isc-dhcp-relay restart
 ```
-
-Setelah kita konfigurasi kita coba test apakah jalan dengan cara `ping google.com` pada salah satu nodes
-
-<img width="639" height="250" alt="image" src="https://github.com/user-attachments/assets/f0549cb3-6966-4526-b37b-558cdb84ba04" />
-
-Dan yap! nomer 1 sudah selesai
 
 
 ### PENGUJIAN
