@@ -13,7 +13,47 @@
 
 
 ## KONFIGURASI JARINGAN
-ini no 1
+
+pada nomer 1 kita diminta untuk membuat topologi dan mengkonfigurasinya, pertama kita bikin topologinya.
+
+<img width="1150" height="671" alt="image" src="https://github.com/user-attachments/assets/3d9d2d3f-d37a-427a-b338-908fb820dca6" />
+
+Setelah kita bikin topologinya, kita konfigurasi setiap nodes yang ada pada jaringan kita
+
+Konfirgurasi Durin
+```
+auto eth0
+iface eth0 inet dhcp
+    # 1. Mengaktifkan IP Forwarding
+    post-up echo 1 > /proc/sys/net/ipv4/ip_forward
+    # 2. Mengaktifkan NAT/Masquerade
+    post-up iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+auto eth1
+iface eth1 inet static
+    address 10.89.1.1
+    netmask 255.255.255.0
+
+auto eth2
+iface eth2 inet static
+    address 10.89.2.1
+    netmask 255.255.255.0
+
+auto eth3
+iface eth3 inet static
+    address 10.89.3.1
+    netmask 255.255.255.0
+
+auto eth4
+iface eth4 inet static
+    address 10.89.4.1
+    netmask 255.255.255.0
+
+auto eth5
+iface eth5 inet static
+    address 10.89.5.1
+    netmask 255.255.255.0
+```
 
 ## KONFIGURASI DHCP
 pada no 2 diminta untuk melakukan konfigurasi DHCP agar client dynamic mendapatkan IP Address secara otomatis dari DHCP Server. Karena beberapa klient berada di jaringan yang berbeda, maka diperlukan DHCP Relay agar client dapat terhubung ke DHCP Server.
@@ -71,6 +111,15 @@ host khamul {
 service isc-dhcp-server restart
 ```
 
+Konfigurasi nodes lain
+auto eth0
+iface eth0 inet static
+    address (sesuaikan dengan masing-masing nodes)
+    netmask 255.255.255.0
+    gateway (sesuaikan dengan masing-masing nodes)
+ up echo nameserver 192.168.122.1 > /etc/resolv.conf
+
+
 ### KONFIGURASI DHCP RELAY (durin)
 ```
 apt update
@@ -86,6 +135,13 @@ echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
 sysctl -p
 service isc-dhcp-relay restart
 ```
+
+Setelah kita konfigurasi kita coba test apakah jalan dengan cara `ping google.com` pada salah satu nodes
+
+<img width="639" height="250" alt="image" src="https://github.com/user-attachments/assets/f0549cb3-6966-4526-b37b-558cdb84ba04" />
+
+Dan yap! nomer 1 sudah selesai
+
 
 ### PENGUJIAN
 <img width="894" height="234" alt="image" src="https://github.com/user-attachments/assets/3aee97ed-5f9a-4c0b-b578-bdd735978e9f" />
