@@ -552,5 +552,185 @@ service mariadb restart
 ```
 
 
+### No. 12
+
+Galadriel:
+
+1. apt update
+
+2. apt install nginx php8.4-fpm -y
+
+3. mkdir -p /var/www/html
+
+4. nano /var/www/html/index.php
+
+```
+<?php
+echo "Hostname: Galadriel\n";
+?>
+
+nano /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+    server_name galadriel.k51.com;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    if ($host !~* ^galadriel\.k51\.com$) {
+        return 444;
+    }
+}
+```
+
+5. nginx -t
+
+6. service php8.4-fpm start
+
+7. service nginx restart
+
+8. service php8.4-fpm status
+
+9. service nginx status
+
+Uji Pada Miriel:
+
+1. curl galadriel.k51.com
+
+Celeborn:
+
+1. apt update
+
+2. apt install nginx php8.4-fpm -y
+
+3. mkdir -p /var/www/html
+
+4. nano /var/www/html/index.php
+
+```
+<?php
+echo "Hostname: Celeborn\n";
+?>
+
+nano /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+    server_name celeborn.k51.com;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    if ($host !~* ^celeborn\.k51\.com$) {
+        return 444;
+    }
+}
+```
+
+5. nginx -t
+
+6. service php8.4-fpm start
+
+7. service nginx restart
+
+8. service php8.4-fpm status
+
+9. service nginx status
+
+Uji Pada Miriel:
+
+1. curl celeborn.k51.com
+
+Oropher:
+
+1. apt update
+
+2. apt install nginx php8.4-fpm -y
+
+3. mkdir -p /var/www/html
+
+4. nano /var/www/html/index.php
+
+```
+<?php
+echo "Hostname: Oropher\n";
+?>
+
+nano /etc/nginx/sites-available/default
+
+server {
+    listen 80;
+    server_name oropher.k51.com;
+
+    root /var/www/html;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/var/run/php/php8.4-fpm.sock;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    if ($host !~* ^oropher\.k51\.com$) {
+        return 444;
+    }
+}
+```
+
+5. nginx -t
+
+6. service php8.4-fpm start
+
+7. service nginx restart
+
+8. service php8.4-fpm status
+
+9. service nginx status
+
+Uji Pada Miriel:
+
+1. curl oropher.k51.com
+
+
+
+
+
+
+
+
 
 
